@@ -1,0 +1,582 @@
+<!-- 首页 -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<!-- 自动探测电话号码 -->
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<title>学生卡</title>
+	<link rel="stylesheet" href="assets/agile/css/agile.layout.css">
+	<!-- <link rel="stylesheet" href="assets/agile/css/ratchet/css/ratchet.min.css"> -->
+	<link rel="stylesheet" href="assets/agile/css/flat/flat.component.css">
+	<link rel="stylesheet" href="assets/agile/css/flat/flat.color.css">
+	<link rel="stylesheet" href="assets/component/timepicker/timepicker.css">
+	<link rel="stylesheet" href="assets/app/css/app.css">
+
+	<link rel="stylesheet" href="assets/agile/css/flat/iconline.css">
+	<link rel="stylesheet" href="assets/agile/css/flat/iconform.css">
+	<link rel="stylesheet" href="assets/agile/css/flat/iconlogo.css">
+	<link rel="stylesheet" href="http://lamp.snewfly.com/static/css/am-commentx.css">
+	<link rel="stylesheet" href="http://lamp.snewfly.com/static/css/am-slide.css">
+
+	<style>
+		.am-circle-noborder{ display:inline-block;-webkit-border-radius: 90px;overflow: hidden; line-height:0;margin-right:20px;}
+		.am-circle{ display:inline-block;-webkit-border-radius: 90px;border:1px solid #a1a1a1;overflow: hidden; line-height:0;margin-right:20px;}
+		.outer { border:1px solid #ccc; }
+		.center_list_item{height:100px; overflow:hidden;vertical-align: middle;margin:0px auto;}
+		.center_list_item_name{top:50%; background-color: #ff0000;display:inline; vertical-align: middle; height:100px;text-align: center}
+
+		#btn_location{bottom: 20px;right: 20px;}
+
+		#btn_addDevice{bottom: 5px;width: 100%}
+
+		.track-top-nav{ display:-webkit-box; height:44px; background-color:#ffffff; border-bottom:1px solid #d8d8d8;}
+		.track-top-nav a{ display:block; -webkit-box-flex:1; text-align:center; line-height:44px;}
+		.track-top-nav a div{display:-webkit-box; -webkit-box-orient:vertical; padding-left:10px;}
+		.track-top-nav a.pull-play{ display:none;}
+		.track-top-nav a.edit-over{ display:none;}
+
+		.center-text{text-align: center;}
+		.center-text-bold{text-align: center;font-weight:bold;margin: 6px}
+
+		#ic_device_delete{ color: red;display: none;}
+
+		/*audio*/
+		.control{ width: 40px; height: 40px;border-radius: 30px; border:none; color:#fff; box-shadow: #888 0 0 8px;margin: 0; padding:0;}
+		.play{ background:skyblue;}
+		.pause{ background:  #f06060;}
+
+		/*时间样式*/
+		.time_block{ width: 100px; height: 20px;color:#888;margin: 10px;margin-right: 30px;}
+		.tiemDetail{ right:10px;}
+		.div_audio{ margin: 8px;}
+		/*audio end*/
+
+	</style>
+
+</head>
+<body>
+	<div id="section_container">
+		<!-- 主页section -->
+		<section id="section_cardcenter" data-role="section" class="active">
+			<header class="titlebar">
+				<h1 class="title">学生卡管理</h1>
+				<a data-toggle="section" href="#section_account" data-transition="slidedown"><i class="iconfont iconline-uid"></i></a>
+			</header>
+			<article data-role="article" data-scroll="pullup" id="article_cardcenter" data-scroll="verticle"  class="active" style="top:44px;bottom:50px;">
+
+				<div class="scroller">
+					<!-- 个人信息 -->
+					<form class="form-group">
+
+						<div  class="card" style="background-color: #10A0EA;">
+							<div style="padding: 8px ;">
+								<img id="img_userhead" class="am-circle-noborder" src="" width="90px" height="90px" style="float: left;" />
+								<!-- <img class="am-circle" src="http://7xkaou.com2.z0.glb.qiniucdn.com/default_avatar.png" width="100" height="100" style="float: left;margin: 3px" /> -->
+								&nbsp;&nbsp;&nbsp;&nbsp;<div id="user_name" style="margin-left: 110px;color: #FEFFFF">
+
+								<span id="sp_user_name">微信昵称</span>
+								<span id="sp_msg_center" style="float: right;">消息中心</span>
+							</div>
+
+							&nbsp;&nbsp;&nbsp;&nbsp;<div id="card_status" style="margin-left: 110px;color: #FEFFFF">积分...</div>
+						</div>
+					</div>
+				</form>
+
+
+				<form class="form-group">
+
+					<div class="card">
+						<ul id="lv_device" class="listitem" style="background-color: #ECF4F8;">
+							<li >暂无绑定设备</li>
+						</ul>
+					</div>
+				</form>
+
+			</div>	
+			
+
+		</article>
+
+		<div style="bottom: 8px;width: 100%"><button class="block" id="btn_addDevice" style="width: 90%;margin: auto">添加学生卡设备</button></div>
+		<!-- 底部tab  ?type=1表示添加、?type=2表示编辑--> 
+<!-- 		<nav class="bar bar-tab">
+			<a style="width: 100%" id="btn_addDevice" class="tab-item active" data-role="tab" data-toggle="section" href="section_card_edit.html?type=1">
+				<span class="iconline-mark-plus"></span>
+				<span class="tab-label">添加学生卡设备</span>
+			</a>
+
+		</nav>   -->
+
+
+
+	</section>
+
+	<section id="section_msgcenter" data-role="section" >
+		<!-- 消息中心 -->
+		<header class="titlebar">
+			<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+			<h1 class="title">消息中心</h1>
+		</header>
+
+		<article data-role="article" id="article_msgcontent" class="active" data-scroll="verticle" style="top:44px;bottom:50px;">
+
+			<div class="scroller padded">
+
+				<div class="section-title" style="font-weight:bold;"  id="list_noMsg">暂无消息</div>
+				<ul class="listitem" id="list_msg"></ul>
+			</div>
+		</article>
+	</section>
+
+	<section id="section_device_main" data-role="section">
+			<header class="titlebar">
+				<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+				<h1 id="title_device_main" class="title">设备A</h1>
+				<a  data-toggle="section" href="section_card_edit.html?type=2" data-transition="slidedown"><i class="iconfont iconline-handsign"></i></a>
+			</header>
+		<article data-role="article" id="article_device_main" data-scroll="verticle" class="active" style="top:44px;bottom:0px;">
+			<div class="scroller "> 
+				<!-- 个人信息 -->
+				<form class="form-group">
+					
+					<div  class="card" style="background-color: #10A0EA;">
+						<div style="padding: 8px ;">
+							<img id="img_device_main_head" class="am-circle" src="" width="100" height="100" style="float: left;margin: 3px" />
+							&nbsp;&nbsp;&nbsp;&nbsp;<div id="" style="margin-left: 110px;color: #FEFFFF"><span id="device_main_status">开机状态</span>
+							<span id="sp_card_change" style="float: right" >设备管理</span>
+						</div>
+
+						&nbsp;&nbsp;&nbsp;&nbsp;<div id="device_main_electricity" style="margin-left: 110px;color: #FEFFFF">电量-</div>
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;<div id="card_status" style="margin-left: 110px;color: #FEFFFF">音量...</div> -->
+					</div>
+				</div>
+			</form>
+			<div class="form-group padded">
+				<button class="block cancel outline ">请先设置语音按键</button>
+			</div>
+			<div >
+				<div  style="text-align: center">
+					<button id="startRecord" class="disable" disabled>
+						<i class="iconfont iconline-record"></i>
+						<span>录音</span>
+					</button>
+					<!-- cancel -->
+					<button id="stopRecord" class="disable" disabled >
+						<i class="iconfont iconline-rdo-cancel"></i>
+						<span>放弃</span>
+					</button>
+					<!-- submit -->
+					<button id="uploadVoice" class="disable" disabled >
+						<i class="iconfont iconline-send"></i>
+						<span>发送</span>
+					</button>
+				</div><br/>
+
+				<div class="outer">
+					<ul id="list_audio" class="am-comments-list padded">
+									</ul>
+								</div>
+
+							</div>
+						</div>  
+
+					</article>
+
+					<!-- 定位tab -->
+					<button id="btn_location" class="btn-3dshadow left">
+						<i class="iconfont iconline-map-location"></i>
+						<span>定位</span>
+					</button>
+				</section>
+
+				<section id="section_card_manage" data-role="section" >
+					<header class="titlebar">
+						<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+						<h1 class="title">设备管理</h1>
+					</header> 
+					<article data-role="article" id="article_card_manage" data-scroll="verticle" class="active" style="top:44px;bottom:0px;">
+						<div class="scroller padded">  
+							<!-- 设备管理 -->
+							<form class="form-group" style="margin-top: 5px" id="form_key_phone">
+								<div data-role="select" class="card nopadding">
+									<select id="select_1" placeholder="选择按键1号码">
+										<option value="" selected="true">选择按键1号码</option>
+
+									</select>
+								</div>
+								<div data-role="select" class="card noborder nopadding">
+									<select id="select_2" placeholder="选择按键2号码">
+										<option value="" selected="true">选择按键2号码</option>
+
+									</select>
+								</div>
+								<div data-role="select" class="card noborder nopadding">
+									<select id="select_3" placeholder="选择按键3号码">
+										<option value="" selected="true">选择按键3号码</option>
+
+									</select>
+								</div>
+							</form>
+
+							<form class="form-group" id="form_volume">
+								<div class="card">
+									<ul class="listitem" id="select_volume">
+										<li >音量</li>
+										<li class="nopadding ">
+											<a data-role="radio">
+												<label width="100%" for="vol_0" class="black" >静音</label>
+												<input checked="true" type="radio" name="volume" id="vol_0" value="0">
+											</a>
+										</li>
+										<li class="nopadding ">
+											<a data-role="radio">
+												<label width="100%" for="vol_1" class="black" >1档</label>
+												<input type="radio" name="volume" id="vol_1" value="2">
+											</a>
+										</li>
+										<li class="nopadding ">
+											<a data-role="radio">
+												<label width="100%" for="vol_2" class="black" >2档</label>
+												<input type="radio" name="volume" id="vol_2" value="4">
+											</a>
+										</li>
+										<li class="nopadding ">
+											<a data-role="radio">
+												<label width="100%" for="vol_3" class="black" >3档</label>
+												<input type="radio" name="volume" id="vol_3" value="6">
+											</a>
+										</li>
+									</ul>
+								</div> 
+							</form>
+							<div><strong style="float: left;margin-left: 5px">到离校通知</strong><div id="toggle_attendance" style="float: right;margin-top: 0px" class="toggle classic" data-role="toggle" data-on="开" data-on-value="1" data-off="关" data-off-value="0"></div><br/>
+						</div><br/>
+						<button id="btn_manage_setting_submit" class="block">提&nbsp;&nbsp;交</button>
+						<button id="btn_school_manage" class="block outline">校园管理</button>
+						<!-- alertDialogue -->
+						<div id="btn_remote_shutdown" class="padded"><button class="block cancel">远程关机</button></div>
+
+					</div>  
+
+				</article>
+			</section>
+
+			<section id="section_card_edit" data-role="section">
+				<header class="titlebar">
+					<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+					<h1 id="title_card_edit" class="title">添加设备</h1>
+					<a id="ic_device_delete"><i class="iconfont iconline-trash"></i></a>
+				</header> 
+				<article data-role="article" id="article_card_edit" data-scroll="verticle" class="active" style="top:44px;bottom:0px;">
+					<div class="scroller padded">  
+						<!-- 编辑/添加设备 -->
+
+						<form autocomplete="false"  class="form-common">
+							<label class="label-left" for="user" style="width: 40px"><span class="iconfont iconline-uid"></span></label>
+							<label class="label-right">
+								<input id="edit_imei" type="text" placeholder="设备id号" pattern="^[0-9]{15}$" title="设备id号" value="" required/>
+							</label>
+							<hr style="margin-top: 1px" /><br/>
+							<label  id="edit_pwd_left" class="label-left" for="password"  style="width: 40px"><span class="iconfont iconline-lock"></span></label>
+							<label  id="edit_pwd_right" class="label-right">
+								<input id="edit_pwd"  type="password" value="" title="设备密码" placeholder="设备密码" required/>
+							</label>
+							<hr  id="edit_pwd_hr"  style="margin-top: 1px" /><br/>
+
+							<label class="label-left" for="user" style="width: 40px"><span class="iconfont iconline-heart-fill"></span></label>
+							<label class="label-right">
+								<input id="edit_nick" type="text" placeholder="昵称" title="昵称" value="" required/>
+							</label>
+							<hr style="margin-top: 2px" /><br/>
+							<label class="label-left">性&nbsp;别：</label>
+							<label class="label-right" id="radio_group_sex">
+								<a data-role="radio">
+									<input type="radio" checked="true" name="sex" id="male" value="男" />
+									<label for="male" class="black">男&nbsp;&nbsp;</label>
+								</a>
+								<a data-role="radio">
+									<input type="radio" name="sex" id="female" value="女" />
+									<label for="female" class="black">女&nbsp;&nbsp;</label>
+								</a>
+							</label>
+							<hr/>
+
+						</form>
+
+						<!-- 选择头像： -->
+						<div class="m-box trac-history" style="background-color: #FFF;overflow: hidden;" >
+							<label style="font-size: 14px;padding-left: 20px;background-color: #FFF;line-height: 44px;">选择头像：</label>
+							<nav class="track-top-nav" style="height:80px;!important">
+								<a id="cg-t-bt" class="gray-col "  style="display: block;height: 60px;margin-top: 10px;">
+									<img class="head-img" src="http://weixin.abdjy.com/icon/baby_boy.png" alt="" style="max-width:60px;height:60px;">
+								</a>
+								<a id="cg-t-bt" class="gray-col "  style="display: block;height: 60px;margin-top: 10px;">
+									<img class="head-img" src="http://weixin.abdjy.com/icon/baby_boy1.png" alt="" style="max-width:60px;height:60px;" >
+								</a>
+								<a id="cg-t-bt" class="gray-col"  style="display: block;height: 60px;margin-top: 10px;">
+									<img class="head-img" src="http://weixin.abdjy.com/icon/baby_girl.png" alt="" style="max-width:60px;height:60px;" >
+								</a>
+								<a id="cg-t-bt" class="gray-col"  style="display: block;height: 60px;margin-top: 10px;">
+									<img class="head-img" src="http://weixin.abdjy.com/icon/baby_girl1.png" alt="" style="max-width:60px;height:60px;">
+								</a>
+							</nav>
+							<!--选中的头像值--> 
+							<input type="hidden" name="iconInfos" id="iconInfos" value="http://weixin.abdjy.com/icon/baby_boy.png"/>
+						</div>
+
+						<button id="btn_edit_submit" class="block">提&nbsp;&nbsp;交</button>
+
+					</div>  
+
+				</article>
+			</section>
+
+			<section id="section_school_manage" data-role="section">
+				<!-- 校园管理 -->
+				<header class="titlebar">
+					<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+					<h1 class="title">校园管理</h1>
+				</header>
+
+				<article data-role="article" id="article_school_manage" class="active" data-scroll="verticle" style="top:44px;bottom:50px;">
+
+					<div class="scroller padded">
+
+
+						<form autocomplete="off" oninput="range_output.value=parseInt(range.value)" class="form-common">
+							<div><strong style="float: left">上课禁用</strong><div style="float: right;margin-top: 0px" class="toggle classic" data-role="toggle" data-on="开" data-on-value="1" data-off="关" data-off-value="0"></div><br/>
+						</div>
+						<div class="center-text-bold">周一~五</div>
+
+						<div>阶段一
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+						<div>阶段二
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+						<div>阶段三
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+						<div>阶段四
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+
+
+						<div class="center-text-bold">周六</div>
+
+						<div>阶段一
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+						<div>阶段二
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+						<div>阶段三
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+						<div>阶段四
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+
+
+						<div class="center-text-bold">周日</div>
+
+						<div>阶段一
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+						<div>阶段二
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+						<div>阶段三
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+						<div>阶段四
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">至
+							<input type="time" name="time" value="00:00" style="height: 35px;width:35%;" readonly="readonly">
+						</div>
+
+					</form>
+
+				</div>
+			</article>
+
+			<!-- 底部tab -->
+			<nav class="bar bar-tab ">
+				<a style="width: 90%" id="btn_school_manage_save" class="tab-item active" data-role="tab" >
+					<button class="block" style="width: 90%;margin: auto">保存</button>
+				</a>
+			</nav>  
+			<div style="bottom: 8px;width: 100%"><button class="block" id="btn_addDevice" style="width: 90%;margin: auto">添加学生卡设备</button></div>
+
+		</section>
+
+		<section id="section_account" data-role="section" >
+			<!-- 账户 -->
+			<header class="titlebar">
+				<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+				<h1 class="title">账户</h1>
+			</header>
+
+			<article data-role="article" id="article_account" class="active" data-scroll="verticle" style="top:44px;bottom:50px;">
+
+				<div class="scroller">
+
+					<div class="card">
+						<ul class="listitem">
+
+							<li >
+								<?php echo $_SESSION['card_loginName'];?>
+							</li>
+							<li>
+								<i class="icon-color-blue ricon iconfont iconline-arrow-right"></i>
+								<div class="text">
+									帮助信息
+								</div>
+							</li>
+
+
+						</ul>
+					</div>
+
+					<div class="padded"><a href="http://lamp.snewfly.com/card_login_page#Login_section"><button class="block cancel">切换账户</button></a></div>
+
+				</div>
+			</article>
+		</section>
+
+		<section id="section_help_info" data-role="section" >
+			<!-- 帮助信息 -->
+			<header class="titlebar">
+				<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+				<h1 class="title">帮助信息</h1>
+			</header>
+
+			<article data-role="article" id="article_msgcontent" class="active" data-scroll="verticle" style="top:44px;bottom:50px;">
+
+				<div class="scroller padded">
+
+					<div class="section-title" style="font-weight:bold;"  id="list_noMsg">帮助信息</div>
+					<ul class="listitem" id="list_msg"></ul>
+				</div>
+			</article>
+		</section>
+
+		<section id="section_trace" data-role="section" >
+			<!-- 定位地图 -->
+			<header class="titlebar">
+				<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+				<h1 class="title">定位地图</h1>
+			</header>
+
+			<article data-role="article" class="active" id="article_trace" data-scroll="verticle" style="top:44px;bottom:50px;">
+
+				<div class="scroller padded">
+
+					<h5 class="content-sub-heading" id="dingweiMain">
+						<!-- <button class="btn btn-red waves-button waves-light waves-effect" id="dingwei" type="button" data-theme="b">刷新定位</button> -->
+					</h5>
+					<div id="container" style="height:500px"></div>
+
+				</div>
+			</article>
+			<!-- 底部tab -->
+						<!-- <nav class="bar bar-tab ">
+							<a style="width: 90%" id="btn_trace" class="tab-item active" data-role="tab">
+								<button class="block" style="width: 90%;margin: auto">获取实时定位</button>
+							</a>
+
+						</nav>   -->
+						<div style="bottom: 8px;width: 100%"><button class="block" id="btn_getLocation" style="width: 90%;margin: auto">获取实时定位</button></div>
+					</section>
+
+
+
+					<section id="section_kaoqin" data-role="section" >
+						<!-- 查看考勤 -->
+						<header class="titlebar">
+							<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+							<h1 class="title">查看考勤</h1>
+						</header>
+
+						<article data-role="article" class="active" id="article_kaoqin" data-scroll="verticle" style="top:44px;bottom:50px;">
+
+							<div class="scroller padded">
+
+								<div class="section-title" style="border-bottom: 2px solid #888; font-weight:bold;">查看考勤</div>
+
+							</div>
+						</article>
+					</section>
+
+
+
+				</div>
+				<!--- third -->
+				<script src="http://7xkaou.com2.z0.glb.qiniucdn.com/jquery-2.1.4.min.js"></script>
+				<script src="assets/third/jquery/jquery.mobile.custom.min.js"></script>
+				<script src="assets/third/iscroll/iscroll-probe.js"></script>
+				<script src="assets/third/arttemplate/template-native.js"></script>
+				<!-- agile -->
+				<script type="text/javascript" src="assets/agile/js/agile.js"></script>
+				<!-- component timepicker-->
+				<script type="text/javascript" src="assets/component/timepicker/agile.timepicker.js"></script>
+				<script type="text/javascript" src="assets/component/extend.js"></script>
+				<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+				<script src="http://7xkaou.com2.z0.glb.qiniucdn.com/RongIMClient-0.9.10.min.js"></script>
+				<!-- app -->
+				<script type="text/javascript" src="assets/app/js/app.js"></script>
+				<script type="text/javascript" src="http://7xkaou.com2.z0.glb.qiniucdn.com/myajax-al-min.js"></script>
+
+				<script type="text/javascript">
+
+	var LS_LastReceiveTime=card_loginName+'card_LastReceiveTime';//标记最后一次收到消息的时间戳，用于过滤历史消息
+
+	var card_last_location='';//最新状态记录，打开地图的时候直接使用，不需要重新获取
+	var card_last_lat='';
+	var card_last_lng='';
+	var card_last_update_time='';
+
+	var TIPS_NOT_SUPPORT_ACTION='该设备不支持此功能';
+
+	var current_device_position=0;//listview 切换设备数组的位置
+	var current_edit_type=1;//当前设备是1编辑还是2添加
+	
+	
+	 var previewSelected=null;//上一个选择的头像对象
+	 var user_info_obj=null;//用户微信info的对象
+	 var user_bind_deivce_obj=null;//用户绑定的设备的对象
+
+	 var hasSetBind=false;//是否配置过设备管理
+
+	 var default_device_pic_url="http://7xkaou.com2.z0.glb.qiniucdn.com/default_avatar.png";//用户默认头像
+	 var default_owner_pic_url="http://7xkaou.com2.z0.glb.qiniucdn.com/default_avatar.png";//微信用户默认头像
+
+	// var map;//地图对象
+</script>
+
+<!-- card core-->
+<script type="text/javascript" src="assets/app/js/card.js?1234<?php echo mt_rand(0,999);?>"></script>
+
+<script type="text/javascript">
+	function loadjs(a,b){var c=document.createElement("script");c.setAttribute("type","text/javascript"),c.setAttribute("src",a),c.setAttribute("id",b),script_id=document.getElementById(b),script_id&&document.getElementsByTagName("head")[0].removeChild(b),document.getElementsByTagName("head")[0].appendChild(c)}
+	loadjs('assets/app/js/card_wechat.js?'+Math.random(),'card_wechat');
+</script>
+<!-- baidu map -->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3c7ffcd0889bb67e543a2328f07964cd"></script>
+
+</body>
+</html>
